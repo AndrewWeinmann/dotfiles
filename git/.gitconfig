@@ -1,0 +1,70 @@
+[core]
+   autocrlf = input
+   editor = code --wait
+   excludesfile = ~/.gitignore
+[merge]
+	tool = vscode
+[mergetool "vscode"]
+	cmd = "code --wait "
+[mergetool]
+	prompt = false
+[init]
+	defaultBranch = main
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname
+[diff]
+	algorithm = histogram
+[push]
+	autoSetupRemote = true
+[fetch]
+	prune = true
+	pruneTags = true
+	all = true
+[help]
+	autocorrect = prompt
+[rebase]
+	autoSquash = true
+	autoStash = true
+	updateRefs = true
+[alias]
+    # Common shortcuts
+    co = checkout
+    br = branch
+    ci = commit
+    st = status
+    fix = commit --fixup
+    fixhead = commit --fixup HEAD
+	fp = push --force-with-lease
+
+    # Undo operations
+    unstage = reset HEAD --
+    undo = reset --soft HEAD^
+
+    # Log operations
+    last = log -1 HEAD
+    lg = log --graph --oneline --decorate --all
+    ll = log --pretty=format:'%C(yellow)%h%Creset %C(blue)%ad%Creset %C(green)%an%Creset %s' --date=short
+
+    # Branch operations
+    branches = branch -a
+    remotes = remote -v
+
+    # Status shortcuts
+    s = status -s
+
+    # Diff operations
+    d = diff
+    ds = diff --staged
+
+    # Stash operations
+    sl = stash list
+    sp = stash pop
+    ss = stash save
+[include]
+    # Local config for user & signing information
+    # Listed last to allow overrides
+    path = ~/.gitconfig.local
