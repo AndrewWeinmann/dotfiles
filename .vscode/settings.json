@@ -1,0 +1,19 @@
+{
+    "cSpell.words": [
+        "committerdate",
+        "Creset",
+        "ecdsa",
+        "excludesfile",
+        "fixhead",
+        "gpgsign",
+        "mergetool",
+        "oneline",
+        "signingkey",
+        "USERPROFILE"
+    ],
+    "editor.formatOnSave": true,
+    "files.associations": {
+        ".gitconfig*": "properties",
+        "LICENSE": "plaintext"
+    }
+}
