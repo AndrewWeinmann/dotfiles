@@ -7,9 +7,13 @@
         "fixhead",
         "gpgsign",
         "mergetool",
+        "msys",
+        "MSYSTEM",
+        "nativestrict",
         "oneline",
         "signingkey",
-        "USERPROFILE"
+        "USERPROFILE",
+        "winsymlinks"
     ],
     "editor.formatOnSave": true,
     "files.associations": {
