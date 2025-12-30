@@ -1,0 +1,13 @@
+-- Example local Wezterm configuration overrides
+--
+-- You can either return a table of config overrides:
+-- return {
+--     font_size = 13,
+--     color_scheme = 'Dracula',
+-- }
+--
+-- Or return a function that modifies the config:
+-- return function(config, wezterm)
+--     config.font_size = 13
+--     config.default_prog = { 'pwsh.exe' }
+-- end

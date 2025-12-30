@@ -7,17 +7,20 @@
         "fixhead",
         "gpgsign",
         "mergetool",
+        "Monaspace",
         "msys",
         "MSYSTEM",
         "nativestrict",
         "oneline",
         "signingkey",
         "USERPROFILE",
+        "wezterm",
         "winsymlinks"
     ],
     "editor.formatOnSave": true,
     "files.associations": {
         ".gitconfig*": "properties",
+        ".wezterm.local.lua.template": "lua",
         "LICENSE": "plaintext"
     }
 }

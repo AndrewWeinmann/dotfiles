@@ -16,3 +16,7 @@ These dotfiles are designed with simplicity and portability in mind:
 ### [Git](./git/README.md)
 
 Git configuration with sensible defaults, global ignore patterns, and GPG signing support. Uses a local config file for machine-specific identity and overrides, keeping sensitive details out of version control.
+
+### [WezTerm](./wezterm/README.md)
+
+Cross-platform terminal emulator setup with platform detection for Windows/Unix. Includes font, theme, and window defaults with a local override system for per-machine customization.
