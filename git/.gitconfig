@@ -52,6 +52,7 @@
     # Branch operations
     branches = branch -a
     remotes = remote -v
+    prune-branches = !git fetch --prune && git branch -vv | grep '\\[origin/.*: gone\\]' | awk '{print $1}' | xargs -r git branch -d
 
     # Status shortcuts
     s = status -s
