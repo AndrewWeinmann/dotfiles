@@ -5,7 +5,26 @@ local wezterm = require 'wezterm'
 local config = wezterm.config_builder()
 
 -- Detect platform
-local is_windows = package.config:sub(1,1) == '\\'
+local is_windows = package.config:sub(1, 1) == '\\'
+
+-- Configurable paths (overridden in .wezterm.local.lua)
+local paths = {
+    git_bash = 'C:\\Program Files\\Git\\bin\\bash.exe',
+    git_bash_cwd = 'C:\\',
+    wsl_start_dir = '/root/projects',
+}
+
+-- Load local overrides if they exist
+local local_config = wezterm.config_dir .. '/.wezterm.local.lua'
+local ok, local_overrides = pcall(dofile, local_config)
+if ok and type(local_overrides) == 'table' then
+    -- Override paths first
+    if local_overrides.paths then
+        for k, v in pairs(local_overrides.paths) do
+            paths[k] = v
+        end
+    end
+end
 
 -- Default program
 if is_windows then
@@ -70,13 +89,38 @@ wezterm.on('format-tab-title', function(tab, tabs, panes, conf, hover, max_width
     return title
 end)
 
+-- Key bindings
+config.keys = {}
+
+if is_windows then
+    config.keys = {
+        {
+            key = 'b',
+            mods = 'CTRL|SHIFT|ALT',
+            action = wezterm.action.SpawnCommandInNewTab {
+                args = { paths.git_bash, '-i', '-l' },
+                cwd = paths.git_bash_cwd,
+            },
+        },
+        {
+            key = 'u',
+            mods = 'CTRL|SHIFT|ALT',
+            action = wezterm.action.SpawnCommandInNewTab {
+                args = { 'wsl.exe', '--distribution', 'Ubuntu', '--cd', paths.wsl_start_dir },
+            },
+        },
+    }
+end
+
+-- Apply any additional config overrides from local file
 if ok and type(local_overrides) == 'function' then
-    -- Allow the local config to modify the config table
     local_overrides(config, wezterm)
 elseif ok and type(local_overrides) == 'table' then
-    -- Merge the returned table into config
+    -- Merge non-paths config values
     for k, v in pairs(local_overrides) do
-        config[k] = v
+        if k ~= 'paths' then
+            config[k] = v
+        end
     end
 end
 

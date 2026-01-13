@@ -2,6 +2,11 @@
 --
 -- You can either return a table of config overrides:
 -- return {
+--    paths = {
+--        wsl_start_dir = '/home/<username>/projects',
+--        git_bash = 'C:\\Program Files\\Git\\bin\\bash.exe',
+--        git_bash_cwd = 'C:\\Users\\<username>',
+--    },
 --     font_size = 13,
 --     color_scheme = 'Dracula',
 -- }
