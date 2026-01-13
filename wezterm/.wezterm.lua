@@ -9,7 +9,7 @@ local is_windows = package.config:sub(1,1) == '\\'
 
 -- Default program
 if is_windows then
-    config.default_prog = { 'C:\\Program Files\\Git\\bin\\bash.exe', '-i', '-l' }
+    config.default_prog = { 'wsl.exe' }
 else
     config.default_prog = { '/bin/bash', '-l' }
 end
@@ -38,9 +38,38 @@ config.animation_fps = 60
 -- Scrollback
 config.scrollback_lines = 10000
 
--- Load local overrides if they exist
-local local_config = wezterm.config_dir .. '/.wezterm.local.lua'
-local ok, local_overrides = pcall(dofile, local_config)
+-- Notifications
+config.audible_bell = 'Disabled'
+config.visual_bell = {
+    fade_in_function = 'EaseIn',
+    fade_in_duration_ms = 0,
+    fade_out_function = 'EaseOut',
+    fade_out_duration_ms = 0,
+}
+
+wezterm.on('format-tab-title', function(tab, tabs, panes, conf, hover, max_width)
+    local title = tab.active_pane.title or ''
+
+    -- Trim long titles so indicators stay visible
+    if #title > 40 then
+        title = title:sub(1, 37) .. '…'
+    end
+
+    local has_unseen_output = false
+    for _, pane in ipairs(tab.panes) do
+        if pane.has_unseen_output then
+            has_unseen_output = true
+            break
+        end
+    end
+
+    if has_unseen_output then
+        title = '● ' .. title
+    end
+
+    return title
+end)
+
 if ok and type(local_overrides) == 'function' then
     -- Allow the local config to modify the config table
     local_overrides(config, wezterm)
