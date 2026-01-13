@@ -11,7 +11,7 @@ for dir in "$SCRIPT_DIR"/*/; do
 
     if [ -f "$dir/setup.sh" ]; then
         # Print module header
-        echo "=== ${module^} Setup ===" >&2
+        echo "=== $(echo ${module:0:1} | tr 'a-z' 'A-Z')${module:1} Setup ===" >&2
 
         # Capture stdout (next steps) and run the script
         if next_step=$("$dir/setup.sh"); then
