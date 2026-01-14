@@ -6,6 +6,7 @@ local config = wezterm.config_builder()
 
 -- Detect platform
 local is_windows = package.config:sub(1, 1) == '\\'
+local is_mac = wezterm.target_triple:find 'darwin' ~= nil
 
 -- Configurable paths (overridden in .wezterm.local.lua)
 local paths = {
@@ -29,7 +30,10 @@ end
 -- Default program
 if is_windows then
     config.default_prog = { 'wsl.exe' }
+elseif is_mac then
+    config.default_prog = { '/bin/zsh', '-l' }
 else
+    -- Linux (Fedora, Ubuntu, etc.)
     config.default_prog = { '/bin/bash', '-l' }
 end
 
