@@ -9,12 +9,12 @@ format = "${custom.wsl}${custom.windows}$all"
 [custom.wsl]
 os = "linux"
 when = 'test -n "$WSL_DISTRO_NAME"'
-command = 'printf "🐧 %s" "$WSL_DISTRO_NAME"'
+command = 'printf "🐧%s" "$WSL_DISTRO_NAME"'
 format = '[$output]($style) '
 style = 'bold bright-blue'
 
 [custom.windows]
 when = 'test -n "$MSYSTEM"'
-command = 'echo 🪟 Windows'
+command = 'echo 🪟'
 format = '[$output]($style) '
 style = 'bold bright-blue'
