@@ -1,0 +1,20 @@
+# Starship configuration
+
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Keep defaults but prefix OS/WSL indicators
+format = "${custom.wsl}${custom.windows}$all"
+
+[custom.wsl]
+os = "linux"
+when = 'test -n "$WSL_DISTRO_NAME"'
+command = 'printf "🐧 %s" "$WSL_DISTRO_NAME"'
+format = '[$output]($style) '
+style = 'bold bright-blue'
+
+[custom.windows]
+when = 'test -n "$MSYSTEM"'
+command = 'echo 🪟 Windows'
+format = '[$output]($style) '
+style = 'bold bright-blue'
