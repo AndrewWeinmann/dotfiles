@@ -18,7 +18,7 @@
 
 - Think before coding - understand the problem fully first
 - Prefer incremental changes over large rewrites
-- Write tests when they add value
+- Write tests when they add value — focus on meaningful coverage, not pursuing 100% coverage
 - Optimize for readability and maintainability over cleverness
 - Document non-obvious decisions and trade-offs
 
@@ -69,6 +69,7 @@
 
 - Write clear, descriptive commit messages
 - Keep commits atomic and focused
+- Commit after each fix for better reviewability
 - Rebase feature branches before merging
 - Don't force push to shared branches
 
