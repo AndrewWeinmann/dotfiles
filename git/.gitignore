@@ -10,3 +10,6 @@ node_modules/
 id_rsa*
 id_ed25519
 id_ecdsa
+
+# Claude in VS Code
+tmpclaude-*
