@@ -13,9 +13,17 @@ These dotfiles are designed with simplicity and portability in mind:
 
 ## Sections
 
+### [AI](./ai/README.md)
+
+AI coding guidelines symlinked to Codex and Claude config directories. Includes a shared `AGENTS.md` with coding principles and conventions applied across AI tools.
+
 ### [Git](./git/README.md)
 
 Git configuration with sensible defaults, global ignore patterns, and GPG signing support. Uses a local config file for machine-specific identity and overrides, keeping sensitive details out of version control.
+
+### [Starship](./starship/README.md)
+
+Minimal Starship prompt configuration with an OS/WSL indicator.
 
 ### [WezTerm](./wezterm/README.md)
 
