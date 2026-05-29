@@ -53,6 +53,7 @@
     branches = branch -a
     remotes = remote -v
     prune-branches = !git fetch --prune && git branch -vv | grep '\\[origin/.*: gone\\]' | awk '{print $1}' | xargs -r git branch -d
+    main = !git switch main && git pull
 
     # Status shortcuts
     s = status -s
@@ -69,3 +70,5 @@
     # Local config for user & signing information
     # Listed last to allow overrides
     path = ~/.gitconfig.local
+[maintenance]
+	repo = /Users/aweinman/EpicSource/EMC2.git/app
