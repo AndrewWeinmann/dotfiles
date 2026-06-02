@@ -30,6 +30,14 @@ end
 -- Default program
 if is_windows then
     config.default_prog = { 'wsl.exe' }
+    -- Forward WezTerm pane info into WSL for tools like claude-code-dashboard.
+    -- Extends WezTerm's built-in WSLENV (TERM, COLORTERM, TERM_PROGRAM,
+    -- TERM_PROGRAM_VERSION) with pane-specific vars. No /p flag — the dashboard
+    -- runs on Windows and needs the original Windows-format paths.
+    config.set_environment_variables = {
+        WSLENV = 'TERM:COLORTERM:TERM_PROGRAM:TERM_PROGRAM_VERSION'
+            .. ':WEZTERM_PANE:WEZTERM_EXECUTABLE:WEZTERM_UNIX_SOCKET',
+    }
 elseif is_mac then
     config.default_prog = { '/bin/zsh', '-l' }
 else
