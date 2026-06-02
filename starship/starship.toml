@@ -5,3 +5,19 @@
 
 [os]
 disabled = false
+
+[profiles]
+claude-code = "$os$claude_model$directory$git_branch$claude_context$claude_cost"
+
+[claude_model]
+format = "[$symbol$model]($style) "
+symbol = "🤖 "
+style = "bold blue"
+
+[claude_context]
+format = "[$gauge $percentage]($style) "
+gauge_width = 10
+
+[claude_cost]
+format = "[$symbol$cost]($style) "
+symbol = "💰 "
