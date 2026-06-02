@@ -13,3 +13,7 @@ id_ecdsa
 
 # Claude in VS Code
 tmpclaude-*
+
+# Claude
+**\.claude\settings.local.json
+**/.claude/settings.local.json

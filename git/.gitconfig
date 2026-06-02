@@ -72,3 +72,8 @@
     path = ~/.gitconfig.local
 [maintenance]
 	repo = /Users/aweinman/EpicSource/EMC2.git/app
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
