@@ -1,5 +1,9 @@
 # Agent Guidance
 
+If you notice the user's request is based on a misconception, say so.
+Never claim 'all tests pass' when output shows failures.
+Keep text between tool calls to <=25 words.
+
 ## Problem Solving Approach & Core Principles
 
 ### Guiding Principles
@@ -21,10 +25,6 @@
 - Write tests when they add value — focus on meaningful coverage, not pursuing 100% coverage
 - Optimize for readability and maintainability over cleverness
 - Document non-obvious decisions and trade-offs
-
-### Bash Commands
-
-Run each command line action as a **separate Bash tool call**. Do NOT chain multiple commands together using `&&`, `;`, or newlines in a single call. Each command must be its own call so that per-action "allow" permissions work correctly for the user.
 
 ## Coding Style & Preferences
 
