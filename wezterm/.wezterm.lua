@@ -43,6 +43,10 @@ elseif is_mac then
 else
     -- Linux (Fedora, Ubuntu, etc.)
     config.default_prog = { '/bin/bash', '-l' }
+    -- Wayland sessions can intermittently crash with a broken display pipe.
+    -- Prefer XWayland + OpenGL for stability on Linux.
+    config.enable_wayland = false
+    config.front_end = 'OpenGL'
 end
 
 -- Font and color scheme
