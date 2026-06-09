@@ -4,101 +4,63 @@ If you notice the user's request is based on a misconception, say so.
 Never claim 'all tests pass' when output shows failures.
 Keep text between tool calls to <=25 words.
 
-## Problem Solving Approach & Core Principles
+## Guiding Principles
 
-### Guiding Principles
+Follow DRY, KISS, YAGNI, and SOLID principles. Prefer incremental changes over large rewrites. Optimize for readability and maintainability over cleverness.
 
-- **DRY (Don't Repeat Yourself)**: Eliminate duplication through abstraction when it makes sense
-- **KISS (Keep It Simple, Stupid)**: Favor simple, straightforward solutions over complex ones
-- **YAGNI (You Aren't Gonna Need It)**: Don't add functionality until it's actually needed
-- **SOLID Principles**: Apply when designing classes and modules
-  - Single Responsibility Principle
-  - Open/Closed Principle
-  - Liskov Substitution Principle
-  - Interface Segregation Principle
-  - Dependency Inversion Principle
-
-### Approach
-
-- Think before coding - understand the problem fully first
-- Prefer incremental changes over large rewrites
-- Write tests when they add value — focus on meaningful coverage, not pursuing 100% coverage
-- Optimize for readability and maintainability over cleverness
-- Document non-obvious decisions and trade-offs
-
-## Coding Style & Preferences
+## Coding Style
 
 ### General
 
-- Use meaningful, descriptive variable and function names
-- Prefer functional programming patterns where appropriate
-- Avoid premature optimization
-- Handle errors explicitly, don't silently fail
 - Use type safety features when available
-- Prefer explicit over implicit behavior
+- Prefer functional programming patterns where appropriate
 
-### Language-Specific Preferences
-
-**JavaScript/TypeScript**:
+### JavaScript/TypeScript
 
 - Use TypeScript for all projects
 - Use modern ES6+ syntax
 - Prefer `const` over `let`, avoid `var`
 - Prefer arrow functions for callbacks
 
-**Shell/Bash**:
+### Shell/Bash
 
+- Prefer Bash or Python over PowerShell for scripting tasks
 - Use shellcheck-compliant code
 - Add error handling with `set -euo pipefail`
 - Quote variables to prevent word splitting
+- Prefer `rg` (ripgrep) over `grep` for content search in shell commands
+- Prefer `fd` over `find` for file discovery in shell commands
 
-## Project Structure Guidelines
+## Environment
 
-### General Organization
+- Git hosting: GitHub (github.com) — use `gh` CLI for MR/issue operations.
+- Prefer reading local source files before using MCP tools for external lookups
 
-- Keep related files close together
-- Separate source code, tests, and configuration
-- Use consistent naming conventions across projects
-- Include README.md with setup and usage instructions
+## Workflow
 
-### File Naming
+### Git
 
-- Use clear, descriptive names that indicate purpose
-- Use lowercase with hyphens for files: `my-component.js`
-- Match test files to source: `my-component.test.js`
-
-## Tools & Workflow Preferences
-
-### Version Control (Git)
-
+- Create a feature branch before starting implementation
+- Commit after each logical step — don't batch changes into one commit at the end
 - Write clear, descriptive commit messages
 - Keep commits atomic and focused
-- Commit after each fix for better reviewability
 - Rebase feature branches before merging
-- Don't force push to shared branches
+- NEVER force push to shared branches
 
-### Development Workflow
+### Plans
 
-- Before writing code, make sure you actually understand the relevant systems, not just the file you're editing. Delegate research to sub-agents if needed, but don't start coding until you can explain how the pieces fit together. If you're guessing, you're not ready.
-- Run tests before committing
-- Check for lint/format issues before committing
-- Keep pull requests focused and reviewable
+Plans for code changes must include all of these:
 
-## Communication Preferences
+1. Branch creation as the first step
+2. Implementation steps with commit points at each logical milestone
+3. Tests — writing or updating tests for new behavior
+4. Documentation updates if applicable
 
-- Be concise but complete in explanations
-- Show code changes clearly
-- Explain the "why" behind decisions
-- Ask clarifying questions when requirements are unclear
-- Provide file paths and line numbers when referencing code
+### Testing
 
-## Security & Best Practices
-
-- Never commit secrets or credentials
-- Validate and sanitize user input
-- Follow OWASP guidelines for web applications
-- Use parameterized queries to prevent SQL injection
-- Escape output to prevent XSS
+- Prefer setting up mock/test data over stubbing or mocking functions
+- Only stub functions that genuinely can't run in test context (e.g., session context, complex library internals)
+- Write tests when they add value — focus on meaningful coverage, not pursuing 100% coverage
 
 ## Knowledge Capture
 
