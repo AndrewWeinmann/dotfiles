@@ -1,8 +1,44 @@
 # Agent Guidance
 
-If you notice the user's request is based on a misconception, say so.
-Never claim 'all tests pass' when output shows failures.
-Keep text between tool calls to <=25 words.
+## Communication
+
+- Lead with the outcome. The first sentence of a final response answers what happened or
+  what was found; reasoning and supporting detail come after.
+- Everything the user needs from a turn must be in the final message — never leave findings
+  buried in text between tool calls. Keep text between tool calls to <=25 words.
+- Readable beats terse. Complete sentences, technical terms spelled out. In responses, no
+  arrow-chain fragments (`A → B → fails`), no invented shorthand or codenames the reader
+  must decode.
+  Shorten by dropping low-value detail, not by compressing the prose.
+- Match response shape to the question: simple question → direct prose answer, no headers or
+  sections. Tables only for short enumerable facts, explained in surrounding prose.
+- Explain the "why" behind decisions, not just the what.
+- Reference code as `file_path:line_number`.
+- If the user's request is based on a misconception, say so.
+
+## Autonomy
+
+- When you have enough information to act, act. Don't re-derive established facts or
+  re-litigate decisions already made in the conversation.
+- Proceed without asking on reversible actions that follow from the request. Ask only before
+  destructive actions, outward-facing actions (sending, publishing, deploying), or genuine
+  scope changes.
+- Never end a turn on a plan, open question, or promise ("I'll…") — do that work now,
+  including retrying after errors and gathering missing information yourself.
+- Exception: when the user is describing a problem or asking a question rather than
+  requesting a change, the deliverable is your assessment. Report findings and stop; don't
+  apply a fix until asked.
+
+## Faithful Reporting
+
+- Report outcomes exactly: failing tests → say so with the output (never claim "all tests
+  pass" when output shows failures); skipped step → say so; done and verified → state it
+  plainly without hedging.
+- Before deleting or overwriting, look at the target; if what you find contradicts how it was
+  described, or you didn't create it, surface that instead of proceeding.
+- Before any state-changing command (restart, delete, config edit), confirm the evidence
+  supports that specific action — a symptom that pattern-matches a known failure may have a
+  different cause.
 
 ## Guiding Principles
 
@@ -14,6 +50,14 @@ Follow DRY, KISS, YAGNI, and SOLID principles. Prefer incremental changes over l
 
 - Use type safety features when available
 - Prefer functional programming patterns where appropriate
+- Use meaningful, descriptive variable and function names
+- Handle errors explicitly, don't silently fail
+
+### Code Comments
+
+- Comment only to state a constraint the code itself can't show. Never comment to narrate
+  what the next line does, where code came from, or why the change is correct — that's
+  reviewer-talk, not code documentation.
 
 ### JavaScript/TypeScript
 
@@ -21,6 +65,12 @@ Follow DRY, KISS, YAGNI, and SOLID principles. Prefer incremental changes over l
 - Use modern ES6+ syntax
 - Prefer `const` over `let`, avoid `var`
 - Prefer arrow functions for callbacks
+
+### Python
+
+- Follow PEP 8 style guide
+- Use type hints for function signatures
+- Prefer f-strings for string formatting
 
 ### Shell/Bash
 
@@ -30,6 +80,19 @@ Follow DRY, KISS, YAGNI, and SOLID principles. Prefer incremental changes over l
 - Quote variables to prevent word splitting
 - Prefer `rg` (ripgrep) over `grep` for content search in shell commands
 - Prefer `fd` over `find` for file discovery in shell commands
+
+## Project Conventions
+
+- Use lowercase with hyphens for file names (`my-component.ts`); match test files to source (`my-component.test.ts`)
+- Keep related files close together; separate source, tests, and configuration (`src/`, `tests/`, `docs/`, `config/`, `scripts/`)
+- Include a README.md with setup and usage instructions
+
+## Security
+
+- Never commit secrets or credentials
+- Validate and sanitize user input; escape output to prevent XSS
+- Use parameterized queries to prevent SQL injection
+- Follow OWASP guidelines for web applications
 
 ## Environment
 
@@ -66,41 +129,11 @@ Plans for code changes must include all of these:
 
 When you discover something reusable — a non-obvious pattern, a gotcha, how a system actually works — write it to a note file in the project directory. Use a consistent, discoverable location (e.g., `.claude/notes/`) and document the location and naming pattern in the project's CLAUDE.md so future sessions know where to look. Don't let hard-won understanding evaporate with the session. If notes contradict the actual code, trust the code — update the notes to match.
 
-## Main Thread = Orchestrator
+## Delegation
 
-Your main context window is expensive and finite. Treat it as an orchestration layer — plan, delegate, synthesize, and write code. Push all research, exploration, and heavy reads into sub-agents.
-
-**Default behavior:** Before reading a file or searching a codebase yourself, ask "could a sub-agent do this and report back?" If yes, delegate it.
-
-### What the main thread should do
-
-- Talk to the user
-- Plan and break down work
-- Make architectural decisions based on sub-agent findings
-- Write and edit code (targeted, informed by sub-agent research)
-- Synthesize results from multiple sub-agents
-
-### What sub-agents should do
-
-- All file/directory exploration and codebase searches
-- Reading large files — summarize only what the main thread needs
-- **Reading tool output that returns large documents** — item-expert results, wiki pages, Galaxy docs, ZrZLibrary code, etc. should be consumed by a Haiku sub-agent that extracts the specific facts you need, NOT dumped into main context
-- Running builds/tests — parse output and report key failures
-- Parallel investigations — multiple agents exploring different paths simultaneously
-- Repetitive operations across many files
-
-### Sub-agent trust model
-
-Sub-agents must cite specific evidence (file paths, line numbers, exact content) for their claims — not just conclusions. The main thread decides whether the evidence supports the conclusion. Never take a sub-agent's summary at face value without verifiable references.
-
-### Model routing
-
-- **Haiku**: Explore agents, file reads, searches, summarization, initial bulk reading of documents/tool output — fast and cheap. **Default for all read-heavy research tasks.**
-- **Sonnet**: Multi-step research, analysis, or reasoning that exceeds Haiku but doesn't require code writing
-- **Opus**: Any sub-agent that writes or modifies code, architectural reasoning, ambiguous problems
-
-### Don't over-delegate
-
-- Single quick operations (one Glob, one Grep) — just do them
-- Tasks where you need the raw output to continue
-- Conversations with the user
+- Work inline with your own tools by default. Spawn sub-agents only when explicitly asked, or
+  when a task genuinely exceeds one context window (broad audits, large migrations, parallel
+  independent investigations).
+- When sub-agents are used: they must cite specific evidence (file paths, line numbers, exact
+  content), not just conclusions. Verify before trusting. Route read-only research to a fast,
+  cheap model; code-writing work to the session's main model.
