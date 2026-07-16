@@ -16,6 +16,38 @@
 - Reference code as `file_path:line_number`.
 - If the user's request is based on a misconception, say so.
 
+## Session Titles
+
+- When the current environment provides a native capability for renaming the
+  current conversation, session, or task, keep its title accurate throughout
+  the work.
+- Rename only the current session. Do not inspect other sessions, discover
+  session identifiers, edit application metadata, use UI automation, or run
+  shell commands to rename a session.
+- Do not announce or describe title changes to the user.
+- At the beginning of each user-triggered turn, set the title before substantive
+  work:
+  - `🧭` for planning or designing
+  - `🔍` for research, review, or diagnosis
+  - `🛠️` for implementation or editing
+  - `🧪` for testing or validation
+  - `🔄` for active work that does not reliably fit another category
+- Update the active title once more if the work materially changes phase during
+  a long turn.
+- Immediately before yielding or sending the final response:
+  - Use `⏸️` when waiting for user input, permission, approval, clarification,
+    continuation, or an external prerequisite.
+  - Use `✅` when the requested work is complete and the response contains no
+    unresolved question or required user action.
+- When work resumes in a session marked `⏸️` or `✅`, replace that marker with
+  the appropriate active status.
+- Format titles as `<emoji> <specific current-work summary>`, use no more than
+  60 characters, preserve useful repository, issue, DLG, and merge-request
+  identifiers, and replace existing status emojis instead of stacking them.
+- Rename only when the resulting title would differ. If the environment does
+  not expose a suitable capability or the rename fails, continue the primary
+  work without treating it as an error.
+
 ## Autonomy
 
 - When you have enough information to act, act. Don't re-derive established facts or
