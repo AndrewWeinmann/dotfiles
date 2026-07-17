@@ -128,7 +128,9 @@ Follow DRY, KISS, YAGNI, and SOLID principles. Prefer incremental changes over l
 
 ## Environment
 
-- Git hosting: GitHub (github.com) — use `gh` CLI for MR/issue operations.
+- Detect the repository host from `git remote get-url origin` before issue or
+  pull-request operations. Use `gh` for GitHub and `glab` for GitLab; follow
+  more specific repository guidance when present.
 - Prefer reading local source files before using MCP tools for external lookups
 
 ## Workflow
@@ -139,6 +141,12 @@ Follow DRY, KISS, YAGNI, and SOLID principles. Prefer incremental changes over l
 - Commit after each logical step — don't batch changes into one commit at the end
 - Write clear, descriptive commit messages
 - Keep commits atomic and focused
+- Before rebasing, autosquashing, amending, or otherwise rewriting history,
+  inspect the actual request or failing job, verify each fixup target contains
+  the changed context, and inventory untracked files that could collide. After
+  the rewrite, compare `ORIG_HEAD` with `HEAD` to confirm the intended content
+  delta. Do not rewrite history to satisfy an assumed CI mechanism; inspect the
+  failing job first.
 - Rebase feature branches before merging
 - NEVER force push to shared branches
 
