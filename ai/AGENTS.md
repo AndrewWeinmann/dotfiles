@@ -35,7 +35,7 @@
 - Update the active title once more if the work materially changes phase during
   a long turn.
 - Immediately before yielding or sending the final response:
-  - Use `⏸️` when waiting for user input, permission, approval, clarification,
+  - Use `⏸️` when waiting for user input, permission, approval (including of a plan), clarification,
     continuation, or an external prerequisite.
   - Use `✅` when the requested work is complete and the response contains no
     unresolved question or required user action.
