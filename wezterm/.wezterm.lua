@@ -5,7 +5,7 @@ local wezterm = require 'wezterm'
 local config = wezterm.config_builder()
 
 -- Detect platform
-local is_windows = package.config:sub(1, 1) == '\\'
+local is_windows = wezterm.target_triple:find 'windows' ~= nil
 local is_mac = wezterm.target_triple:find 'darwin' ~= nil
 
 -- Configurable paths (overridden in .wezterm.local.lua)
@@ -106,8 +106,6 @@ wezterm.on('format-tab-title', function(tab, tabs, panes, conf, hover, max_width
 end)
 
 -- Key bindings
-config.keys = {}
-
 if is_windows then
     config.keys = {
         {

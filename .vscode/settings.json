@@ -1,13 +1,14 @@
 {
     "cSpell.words": [
+        "cksum",
         "claude",
         "committerdate",
         "Creset",
+        "cygpath",
         "ecdsa",
         "excludesfile",
         "fixhead",
         "gpgsign",
-        "Liskov",
         "mergetool",
         "Monaspace",
         "msys",
@@ -15,11 +16,13 @@
         "nativestrict",
         "oneline",
         "pipefail",
+        "rerere",
         "shellcheck",
         "signingkey",
         "USERPROFILE",
         "wezterm",
-        "winsymlinks"
+        "winsymlinks",
+        "zdiff"
     ],
     "editor.formatOnSave": true,
     "files.associations": {
