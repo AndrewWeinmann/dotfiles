@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e  # Exit on error
+set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 NEXT_STEPS=()
@@ -11,7 +11,7 @@ for dir in "$SCRIPT_DIR"/*/; do
 
     if [ -f "$dir/setup.sh" ]; then
         # Print module header
-        echo "=== $(echo ${module:0:1} | tr 'a-z' 'A-Z')${module:1} Setup ===" >&2
+        echo "=== $(printf '%s' "${module:0:1}" | tr '[:lower:]' '[:upper:]')${module:1} Setup ===" >&2
 
         # Capture stdout (next steps) and run the script
         if next_step=$("$dir/setup.sh"); then

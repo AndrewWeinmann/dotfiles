@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e  # Exit on error
+set -euo pipefail
 
 # Get the directory where this script lives
 DIRECTORY="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
