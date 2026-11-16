@@ -1,7 +1,6 @@
 [core]
    autocrlf = input
    editor = code --wait
-   excludesfile = ~/.gitignore
 [merge]
 	tool = vscode
 [mergetool "vscode"]
@@ -66,14 +65,3 @@
     sl = stash list
     sp = stash pop
     ss = stash save
-[include]
-    # Local config for user & signing information
-    # Listed last to allow overrides
-    path = ~/.gitconfig.local
-[maintenance]
-	repo = /Users/aweinman/EpicSource/EMC2.git/app
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
