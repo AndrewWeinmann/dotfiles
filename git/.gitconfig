@@ -3,6 +3,7 @@
 	editor = code --wait
 [merge]
 	tool = vscode
+	conflictStyle = zdiff3
 [mergetool]
 	prompt = false
 [init]
@@ -15,6 +16,8 @@
 	sort = version:refname
 [diff]
 	algorithm = histogram
+[pull]
+	rebase = true
 [push]
 	autoSetupRemote = true
 [fetch]
@@ -27,6 +30,8 @@
 	autoSquash = true
 	autoStash = true
 	updateRefs = true
+[rerere]
+	enabled = true
 [alias]
 	# Common shortcuts
 	co = checkout
