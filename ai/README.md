@@ -13,7 +13,7 @@ Run the parent `install.sh` or directly run `./setup.sh` in this directory.
 The setup process will:
 
 1. Create or symlink `AGENTS.md` to your codex and claude directories
-1. Back up any existing config files
+2. Back up any existing config files
 
 ## Next Steps
 
