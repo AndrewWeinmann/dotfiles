@@ -1,10 +1,8 @@
 [core]
-   autocrlf = input
-   editor = code --wait
+	autocrlf = input
+	editor = code --wait
 [merge]
 	tool = vscode
-[mergetool "vscode"]
-	cmd = "code --wait "
 [mergetool]
 	prompt = false
 [init]
@@ -30,38 +28,38 @@
 	autoStash = true
 	updateRefs = true
 [alias]
-    # Common shortcuts
-    co = checkout
-    br = branch
-    ci = commit
-    st = status
-    fix = commit --fixup
-    fixhead = commit --fixup HEAD
+	# Common shortcuts
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	fix = commit --fixup
+	fixhead = commit --fixup HEAD
 	fp = push --force-with-lease
 
-    # Undo operations
-    unstage = reset HEAD --
-    undo = reset --soft HEAD^
+	# Undo operations
+	unstage = reset HEAD --
+	undo = reset --soft HEAD^
 
-    # Log operations
-    last = log -1 HEAD
-    lg = log --graph --oneline --decorate --all
-    ll = log --pretty=format:'%C(yellow)%h%Creset %C(blue)%ad%Creset %C(green)%an%Creset %s' --date=short
+	# Log operations
+	last = log -1 HEAD
+	lg = log --graph --oneline --decorate --all
+	ll = log --pretty=format:'%C(yellow)%h%Creset %C(blue)%ad%Creset %C(green)%an%Creset %s' --date=short
 
-    # Branch operations
-    branches = branch -a
-    remotes = remote -v
-    prune-branches = !git fetch --prune && git branch -vv | grep '\\[origin/.*: gone\\]' | awk '{print $1}' | xargs -r git branch -d
-    main = !git switch main && git pull
+	# Branch operations
+	branches = branch -a
+	remotes = remote -v
+	prune-branches = !git fetch --prune && git branch -vv | grep '\\[origin/.*: gone\\]' | awk '{print $1}' | xargs -r git branch -d
+	main = !git switch main && git pull
 
-    # Status shortcuts
-    s = status -s
+	# Status shortcuts
+	s = status -s
 
-    # Diff operations
-    d = diff
-    ds = diff --staged
+	# Diff operations
+	d = diff
+	ds = diff --staged
 
-    # Stash operations
-    sl = stash list
-    sp = stash pop
-    ss = stash save
+	# Stash operations
+	sl = stash list
+	sp = stash pop
+	ss = stash push
